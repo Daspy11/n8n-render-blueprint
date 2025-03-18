@@ -30,7 +30,7 @@ services:
           name: n8n-db
           property: password
       - key: WEBHOOK_URL
-        value: https://<CHANGEME>.com/
+        value: https://n8n-render-blueprint-wp1b.onrender.com/
     disk:
       name: n8n-disk
       mountPath: /home/node/.n8n
