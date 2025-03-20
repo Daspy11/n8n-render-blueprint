@@ -1,21 +1,14 @@
-FROM node:18-alpine  
-WORKDIR /data  
+# Usamos la imagen oficial de n8n
+FROM n8nio/n8n:latest
 
-RUN apk add --no-cache curl bash tini \
-    && npm install -g n8n  
+# Establecer el directorio de trabajo
+WORKDIR /data
 
-EXPOSE 5678  
+# Asegurar que el comando `n8n` está disponible
+RUN ls -lah /usr/local/bin/n8n && n8n --version
 
-ENTRYPOINT ["tini", "--", "n8n"]
+# Exponer el puerto de n8n
+EXPOSE 5678
 
-# Environment variables (adjust as needed)
-ENV N8N_BASIC_AUTH_ACTIVE=true \
-    N8N_BASIC_AUTH_USER=admin \
-    N8N_BASIC_AUTH_PASSWORD=admin \
-    WEBHOOK_TUNNEL_URL=https://n8n-render-blueprint-wp1b.onrender.com \
-    N8N_HOST=0.0.0.0 \
-    N8N_PORT=5678 \
-    N8N_PROTOCOL=http
-
-# Start n8n
+# Definir el comando de inicio
 CMD ["n8n"]
