@@ -1,13 +1,12 @@
-FROM n8nio/n8n:latest
+FROM node:18-alpine  
+WORKDIR /data  
 
-# Set working directory
-WORKDIR /data
+RUN apk add --no-cache curl bash tini \
+    && npm install -g n8n  
 
-# Install additional dependencies if needed (optional)
-# RUN apk add --no-cache <your-dependencies>
+EXPOSE 5678  
 
-# Expose default n8n port
-EXPOSE 5678
+ENTRYPOINT ["tini", "--", "n8n"]
 
 # Environment variables (adjust as needed)
 ENV N8N_BASIC_AUTH_ACTIVE=true \
