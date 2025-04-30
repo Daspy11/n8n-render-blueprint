@@ -12,4 +12,3 @@ This repository is configured to deploy a basic web service + docker container. 
 
 **Notes**
 - Don't change the storage volume location, this is hardcoded in Render.
-- I didn't test the workflow export shell script.
